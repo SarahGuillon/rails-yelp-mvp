@@ -1,0 +1,23 @@
+<h1> <%= @restaurant.name %> </h1>
+<br>
+<h4><strong> Information </strong></h4>
+<p> <strong> Adress : </strong> <%= @restaurant.address %> </p>
+<p> <strong> Phone number : </strong> <%= @restaurant.phone_number %> </p>
+<p> <strong> Category : </strong> <%= @restaurant.category %> </p>
+<br>
+<h4><strong> Reviews </strong></h4>
+<% @restaurant.reviews.each do |review|%>
+  <p> <strong> Ratings : </strong> <%= "⭐" *review.rating %> </p>
+  <p> <strong> Comments : </strong> <%= review.content%> </p>
+<% end %>
+<%# <%= link_to "Add a review ", restaurant_path(@restaurant) %>
+<hr>
+<h1>Add a review :</h1>
+
+<%= simple_form_for([ @restaurant, @review ]) do |f| %>
+  <%= f.input :rating ,collection: %w[0 1 2 3 4 5] %>
+  <%= f.input :content %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
+<hr>
+<%= link_to "back homepage", restaurants_path %>
